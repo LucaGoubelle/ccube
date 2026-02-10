@@ -4,7 +4,7 @@
 #include "../data/cube.h"
 
 
-struct Cube moveU(struct Cube cube){
+Cube moveU(Cube cube){
     int size = cube.size;
     cube.up = rotate(cube.up, size);
 
@@ -34,21 +34,21 @@ struct Cube moveU(struct Cube cube){
     return cube;
 }
 
-struct Cube moveUPrime(struct Cube cube){
+Cube moveUPrime(Cube cube){
     int i;
     for(i=0;i<3;i++)
         cube = moveU(cube);
     return cube;
 }
 
-struct Cube moveU2(struct Cube cube){
+Cube moveU2(Cube cube){
     int i;
     for(i=0;i<2;i++)
         cube = moveU(cube);
     return cube;
 }
 
-struct Cube moveD(struct Cube cube){
+Cube moveD(Cube cube){
     int size = cube.size;
     cube.down = rotate(cube.down, size);
 
@@ -78,14 +78,14 @@ struct Cube moveD(struct Cube cube){
     return cube;
 }
 
-struct Cube moveDPrime(struct Cube cube){
+Cube moveDPrime(Cube cube){
     int i;
     for(i=0;i<3;i++)
         cube = moveD(cube);
     return cube;
 }
 
-struct Cube moveD2(struct Cube cube){
+Cube moveD2(Cube cube){
     int i;
     for(i=0;i<2;i++)
         cube = moveD(cube);

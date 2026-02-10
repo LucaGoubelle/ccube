@@ -2,7 +2,7 @@
 #pragma once
 #include "face.h"
 
-struct Cube {
+typedef struct {
     int size;
     char** back;
     char** up;
@@ -10,10 +10,10 @@ struct Cube {
     char** left;
     char** right;
     char** down;
-};
+} Cube;
 
-struct Cube getCube(int size){
-    struct Cube cube;
+Cube getCube(int size){
+    Cube cube;
     cube.size = size;
     cube.back = genFace(size, 'G');
     cube.up = genFace(size, 'Y');
@@ -24,7 +24,7 @@ struct Cube getCube(int size){
     return cube;
 }
 
-void destroyCube(struct Cube cube){
+void destroyCube(Cube cube){
     freeFace(cube.back, cube.size);
     freeFace(cube.up, cube.size);
     freeFace(cube.front, cube.size);

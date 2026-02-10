@@ -48,7 +48,7 @@ void _printRowLFRB(int size, char* rowL, char* rowF, char* rowR, char* rowB){
     printf("\n");
 }
 
-void printCube(struct Cube cube){
+void printCube(Cube cube){
     int i, j, k;
     for(i=0;i<cube.size;i++)
         _printRowUpDown(cube.up[i], cube.size);

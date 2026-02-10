@@ -2,7 +2,7 @@
 #pragma once
 #include "stdMoves.h"
 
-struct Cube simpleMove(struct Cube cube, char* mv){
+Cube simpleMove(Cube cube, char* mv){
     if(mv=="U")
         return moveU(cube);
     else if(mv=="U'")
@@ -26,7 +26,7 @@ int count(char** mvs){
     return i;
 }
 
-struct Cube multiMoves(struct Cube cube, char** mvs){
+Cube multiMoves(Cube cube, char** mvs){
     int size = count(mvs);
     printf("%d", size);
     int i;

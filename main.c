@@ -5,7 +5,7 @@ int main(int argc, char** argv){
     printf("Begin prog...\n");
 
     int size = 3;
-    struct Cube cube = getCube(size);
+    Cube cube = getCube(size);
 
     printCube(cube);
 
