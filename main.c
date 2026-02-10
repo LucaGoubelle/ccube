@@ -6,6 +6,7 @@ int main(int argc, char** argv){
 
     int size = 3;
     Cube cube = getCube(size);
+    Mover mover = getMover();
 
     printCube(cube);
 
@@ -15,9 +16,7 @@ int main(int argc, char** argv){
         NULL
     };
 
-    cube = multiMoves(cube, moves);
-
-    // cube = simpleMove(cube, "R");
+    cube = mover.moveMany(cube, moves);
 
     printf("\n\n");
     printCube(cube);

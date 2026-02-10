@@ -2,6 +2,11 @@
 #pragma once
 #include "stdMoves.h"
 
+typedef struct {
+    Cube (*moveOne)(Cube, char*);
+    Cube (*moveMany)(Cube, char**);
+} Mover;
+
 Cube simpleMove(Cube cube, char* mv){
     if(mv=="U")
         return moveU(cube);
@@ -39,4 +44,11 @@ Cube multiMoves(Cube cube, char** mvs){
     for(i=0;i<size;i++)
         cube = simpleMove(cube, mvs[i]);
     return cube;
+}
+
+Mover getMover(){
+    Mover mover;
+    mover.moveOne = simpleMove;
+    mover.moveMany = multiMoves;
+    return mover;
 }
