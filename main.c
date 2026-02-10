@@ -9,7 +9,14 @@ int main(int argc, char** argv){
 
     printCube(cube);
 
-    cube = simpleMove(cube, "U2");
+    char* moves[] = {
+        "U'",
+        "D'",
+        "U",
+        NULL
+    };
+
+    cube = multiMoves(cube, moves);
 
     printf("\n\n");
     printCube(cube);
