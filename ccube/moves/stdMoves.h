@@ -91,3 +91,47 @@ Cube moveD2(Cube cube){
         cube = moveD(cube);
     return cube;
 }
+
+Cube moveR(Cube cube){
+    int size = cube.size;
+    cube.right = rotate(cube.right, size);
+
+    char** newFront = genEmptyFace(size);
+    char** newUp = genEmptyFace(size);
+    char** newBack = genEmptyFace(size);
+    char** newDown = genEmptyFace(size);
+    
+    int i;
+    for(i=0;i<size;i++){
+        newFront[i][size-1] = cube.down[i][size-1];
+        newUp[i][size-1] = cube.front[i][size-1];
+        newBack[i][size-1] = cube.up[i][size-1];
+        newDown[i][0] = cube.back[i][0];
+    }
+
+    cube.front = transfert(cube.front, newFront, size);
+    cube.up = transfert(cube.up, newUp, size);
+    cube.back = transfert(cube.back, rotateTwice(newBack, size), size);
+    cube.down = transfert(cube.down, rotateTwice(newDown, size), size);
+
+    freeFace(newFront, size);
+    freeFace(newUp, size);
+    freeFace(newBack, size);
+    freeFace(newDown, size);
+
+    return cube;
+}
+
+Cube moveRPrime(Cube cube){
+    int i;
+    for(i=0;i<3;i++)
+        cube = moveR(cube);
+    return cube;
+}
+
+Cube moveR2(Cube cube){
+    int i;
+    for(i=0;i<2;i++)
+        cube = moveR(cube);
+    return cube;
+}

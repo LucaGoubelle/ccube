@@ -15,6 +15,12 @@ Cube simpleMove(Cube cube, char* mv){
         return moveDPrime(cube);
     else if(mv=="D2")
         return moveD2(cube);
+    else if(mv=="R")
+        return moveR(cube);
+    else if(mv=="R'")
+        return moveRPrime(cube);
+    else if(mv=="R2")
+        return moveR2(cube);
     else
         return cube;
 }

@@ -11,12 +11,13 @@ int main(int argc, char** argv){
 
     char* moves[] = {
         "U'",
-        "D'",
-        "U",
+        "R'",
         NULL
     };
 
     cube = multiMoves(cube, moves);
+
+    // cube = simpleMove(cube, "R");
 
     printf("\n\n");
     printCube(cube);
