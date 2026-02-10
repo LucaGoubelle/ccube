@@ -6,15 +6,11 @@ int main(int argc, char** argv){
 
     int size = 3;
     Cube cube = getCube(size);
-    Mover mover = getMover();
+    MOVER mover = Mover();
 
     printCube(cube);
 
-    char* moves[] = {
-        "U'",
-        "R'",
-        NULL
-    };
+    char* moves[] = {"R'","y",NULL};
 
     cube = mover.moveMany(cube, moves);
 

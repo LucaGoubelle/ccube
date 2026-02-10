@@ -3,6 +3,17 @@
 #include "rotateHelpers.h"
 #include "../data/cube.h"
 
+typedef struct {
+    Cube (*U)(Cube);
+    Cube (*UPrime)(Cube);
+    Cube (*U2)(Cube);
+    Cube (*D)(Cube);
+    Cube (*DPrime)(Cube);
+    Cube (*D2)(Cube);
+    Cube (*R)(Cube);
+    Cube (*RPrime)(Cube);
+    Cube (*R2)(Cube);
+} STD_MOVES;
 
 Cube moveU(Cube cube){
     int size = cube.size;
@@ -134,4 +145,20 @@ Cube moveR2(Cube cube){
     for(i=0;i<2;i++)
         cube = moveR(cube);
     return cube;
+}
+
+STD_MOVES STDMoves(){
+    STD_MOVES stdMoves;
+
+    stdMoves.U = moveU;
+    stdMoves.UPrime = moveUPrime;
+    stdMoves.U2 = moveU2;
+    stdMoves.D = moveD;
+    stdMoves.DPrime = moveDPrime;
+    stdMoves.D2 = moveD2;
+    stdMoves.R = moveR;
+    stdMoves.RPrime = moveRPrime;
+    stdMoves.R2 = moveR2;
+    
+    return stdMoves;
 }

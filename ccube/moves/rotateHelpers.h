@@ -3,6 +3,15 @@
 #include "../data/face.h"
 
 
+char** copyMatrix(char** mtx, int size){
+    char** newMtx = genEmptyFace(size);
+    int i, j;
+    for(i=0;i<size;i++)
+        for(j=0;j<size;j++)
+            newMtx[i][j] = mtx[i][j];
+    return newMtx;
+}
+
 char** rotate(char** face, int size){
     char** newFace = genEmptyFace(size);
     int i, j;
