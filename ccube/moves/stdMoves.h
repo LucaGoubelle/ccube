@@ -15,7 +15,7 @@ typedef struct {
     Cube (*R2)(Cube);
 } STD_MOVES;
 
-Cube moveU(Cube cube){
+Cube _moveU(Cube cube){
     int size = cube.size;
     cube.up = rotate(cube.up, size);
 
@@ -45,21 +45,21 @@ Cube moveU(Cube cube){
     return cube;
 }
 
-Cube moveUPrime(Cube cube){
+Cube _moveUPrime(Cube cube){
     int i;
     for(i=0;i<3;i++)
-        cube = moveU(cube);
+        cube = _moveU(cube);
     return cube;
 }
 
-Cube moveU2(Cube cube){
+Cube _moveU2(Cube cube){
     int i;
     for(i=0;i<2;i++)
-        cube = moveU(cube);
+        cube = _moveU(cube);
     return cube;
 }
 
-Cube moveD(Cube cube){
+Cube _moveD(Cube cube){
     int size = cube.size;
     cube.down = rotate(cube.down, size);
 
@@ -89,21 +89,21 @@ Cube moveD(Cube cube){
     return cube;
 }
 
-Cube moveDPrime(Cube cube){
+Cube _moveDPrime(Cube cube){
     int i;
     for(i=0;i<3;i++)
-        cube = moveD(cube);
+        cube = _moveD(cube);
     return cube;
 }
 
-Cube moveD2(Cube cube){
+Cube _moveD2(Cube cube){
     int i;
     for(i=0;i<2;i++)
-        cube = moveD(cube);
+        cube = _moveD(cube);
     return cube;
 }
 
-Cube moveR(Cube cube){
+Cube _moveR(Cube cube){
     int size = cube.size;
     cube.right = rotate(cube.right, size);
 
@@ -133,32 +133,32 @@ Cube moveR(Cube cube){
     return cube;
 }
 
-Cube moveRPrime(Cube cube){
+Cube _moveRPrime(Cube cube){
     int i;
     for(i=0;i<3;i++)
-        cube = moveR(cube);
+        cube = _moveR(cube);
     return cube;
 }
 
-Cube moveR2(Cube cube){
+Cube _moveR2(Cube cube){
     int i;
     for(i=0;i<2;i++)
-        cube = moveR(cube);
+        cube = _moveR(cube);
     return cube;
 }
 
 STD_MOVES STDMoves(){
     STD_MOVES stdMoves;
 
-    stdMoves.U = moveU;
-    stdMoves.UPrime = moveUPrime;
-    stdMoves.U2 = moveU2;
-    stdMoves.D = moveD;
-    stdMoves.DPrime = moveDPrime;
-    stdMoves.D2 = moveD2;
-    stdMoves.R = moveR;
-    stdMoves.RPrime = moveRPrime;
-    stdMoves.R2 = moveR2;
+    stdMoves.U = _moveU;
+    stdMoves.UPrime = _moveUPrime;
+    stdMoves.U2 = _moveU2;
+    stdMoves.D = _moveD;
+    stdMoves.DPrime = _moveDPrime;
+    stdMoves.D2 = _moveD2;
+    stdMoves.R = _moveR;
+    stdMoves.RPrime = _moveRPrime;
+    stdMoves.R2 = _moveR2;
     
     return stdMoves;
 }

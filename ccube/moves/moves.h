@@ -8,8 +8,7 @@ typedef struct {
     Cube (*moveMany)(Cube, char**);
 } MOVER;
 
-Cube simpleMove(Cube cube, char* mv){
-    AXIS_MOVES axm = AxisMoves();
+Cube _handleSTDMoves(Cube cube, char* mv){
     STD_MOVES stdm = STDMoves();
     if(mv=="U")
         return stdm.U(cube);
@@ -29,14 +28,38 @@ Cube simpleMove(Cube cube, char* mv){
         return stdm.RPrime(cube);
     else if(mv=="R2")
         return stdm.R2(cube);
-    else if(mv=="y")
+    else
+        return cube;
+}
+
+Cube _handleAxisMoves(Cube cube, char* mv){
+    AXIS_MOVES axm = AxisMoves();
+    if(mv=="y")
         return axm.Y(cube);
     else if(mv=="y'")
         return axm.YPrime(cube);
     else if(mv=="y2")
         return axm.Y2(cube);
+    else if(mv=="x")
+        return axm.X(cube);
+    else if(mv=="x'")
+        return axm.XPrime(cube);
+    else if(mv=="x2")
+        return axm.X2(cube);
+    else if(mv=="z")
+        return axm.Z(cube);
+    else if(mv=="z'")
+        return axm.ZPrime(cube);
+    else if(mv=="z2")
+        return axm.Z2(cube);
     else
         return cube;
+}
+
+Cube _simpleMove(Cube cube, char* mv){
+    cube = _handleSTDMoves(cube, mv);
+    cube = _handleAxisMoves(cube, mv);
+    return cube;
 }
 
 int _count(char** mvs){
@@ -46,17 +69,17 @@ int _count(char** mvs){
     return i;
 }
 
-Cube multiMoves(Cube cube, char** mvs){
+Cube _multiMoves(Cube cube, char** mvs){
     int size = _count(mvs);
     int i;
     for(i=0;i<size;i++)
-        cube = simpleMove(cube, mvs[i]);
+        cube = _simpleMove(cube, mvs[i]);
     return cube;
 }
 
 MOVER Mover(){
     MOVER mover;
-    mover.moveOne = simpleMove;
-    mover.moveMany = multiMoves;
+    mover.moveOne = _simpleMove;
+    mover.moveMany = _multiMoves;
     return mover;
 }
