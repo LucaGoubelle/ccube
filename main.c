@@ -7,15 +7,16 @@ int main(int argc, char** argv){
     int size = 3;
     Cube cube = getCube(size);
     MOVER mover = Mover();
+    CUBE_PRINTER printer = CubePrinter();
 
-    printCube(cube);
+    printer.print(cube);
 
     char* moves[] = {"R'","y",NULL};
 
     cube = mover.moveMany(cube, moves);
 
     printf("\n\n");
-    printCube(cube);
+    printer.print(cube);
 
     destroyCube(cube);
 

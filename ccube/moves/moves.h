@@ -48,7 +48,6 @@ int _count(char** mvs){
 
 Cube multiMoves(Cube cube, char** mvs){
     int size = _count(mvs);
-    printf("%d", size);
     int i;
     for(i=0;i<size;i++)
         cube = simpleMove(cube, mvs[i]);

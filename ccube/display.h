@@ -9,6 +9,10 @@ const char* BLUE = "\033[44m \033[0m";
 const char* MAGENTA = "\033[45m \033[0m";
 const char* WHITE = "\033[47m \033[0m";
 
+typedef struct {
+    void (*print)(Cube);
+} CUBE_PRINTER;
+
 const char* _getColorString(char elem){
     if(elem=='G')
         return GREEN;
@@ -57,4 +61,10 @@ void printCube(Cube cube){
     for(k=0;k<cube.size;k++)
         _printRowUpDown(cube.down[k], cube.size);
     printf("\n");
+}
+
+CUBE_PRINTER CubePrinter(){
+    CUBE_PRINTER printer;
+    printer.print = printCube;
+    return printer;
 }
