@@ -52,7 +52,7 @@ void _printRowLFRB(int size, char* rowL, char* rowF, char* rowR, char* rowB){
     printf("\n");
 }
 
-void printCube(Cube cube){
+void _printCube(Cube cube){
     int i, j, k;
     for(i=0;i<cube.size;i++)
         _printRowUpDown(cube.up[i], cube.size);
@@ -65,6 +65,6 @@ void printCube(Cube cube){
 
 CUBE_PRINTER CubePrinter(){
     CUBE_PRINTER printer;
-    printer.print = printCube;
+    printer.print = _printCube;
     return printer;
 }

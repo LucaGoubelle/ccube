@@ -28,6 +28,12 @@ Cube _handleSTDMoves(Cube cube, char* mv){
         return stdm.RPrime(cube);
     else if(mv=="R2")
         return stdm.R2(cube);
+    else if(mv=="L")
+        return stdm.L(cube);
+    else if(mv=="L'")
+        return stdm.LPrime(cube);
+    else if(mv=="L2")
+        return stdm.L2(cube);
     else
         return cube;
 }
