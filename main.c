@@ -9,12 +9,13 @@ int main(int argc, char** argv){
     MOVER mover = Mover();
 
     printCube(cube);
-
-    char* moves[] = {"R'","y",NULL};
-
-    cube = mover.moveMany(cube, moves);
-
     printf("\n\n");
+
+    SCRAMBLER scrambler = Scrambler();
+    cube = scrambler.scrambling(cube);
+    // char* moves[] = {"R'","y",NULL};
+    // cube = mover.moveMany(cube, moves);
+
     printCube(cube);
 
     destroyCube(cube);
