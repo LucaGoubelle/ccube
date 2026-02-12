@@ -11,7 +11,7 @@ int main(int argc, char** argv){
 
     printer.print(cube);
 
-    char* moves[] = {"y","L'",NULL};
+    char* moves[] = {"y","F'",NULL};
 
     cube = mover.moveMany(cube, moves);
 

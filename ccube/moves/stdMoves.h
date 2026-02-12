@@ -16,6 +16,9 @@ typedef struct {
     Cube (*L)(Cube);
     Cube (*LPrime)(Cube);
     Cube (*L2)(Cube);
+    Cube (*F)(Cube);
+    Cube (*FPrime)(Cube);
+    Cube (*F2)(Cube);
 } STD_MOVES;
 
 Cube _moveU(Cube cube){
@@ -194,6 +197,50 @@ Cube _moveL2(Cube cube){
     return cube;
 }
 
+Cube _moveF(Cube cube){
+    int size = cube.size;
+    cube.front = rotate(cube.front, size);
+
+    char** newUp = genEmptyFace(size);
+    char** newLeft = genEmptyFace(size);
+    char** newRight = genEmptyFace(size);
+    char** newDown = genEmptyFace(size);
+
+    int i;
+    for(i=0;i<size;i++){
+        newUp[i][size-1] = cube.left[i][size-1];
+        newLeft[0][i] = cube.down[0][i];
+        newRight[size-1][i] = cube.up[size-1][i];
+        newDown[i][0] = cube.right[i][0];
+    }
+
+    cube.up = transfert(cube.up, rotate(newUp, size), size);
+    cube.left = transfert(cube.left, rotate(newLeft, size), size);
+    cube.right = transfert(cube.right, rotate(newRight, size), size);
+    cube.down = transfert(cube.down, rotate(newDown, size), size);
+
+    freeFace(newUp, size);
+    freeFace(newLeft, size);
+    freeFace(newRight, size);
+    freeFace(newDown, size);
+
+    return cube;
+}
+
+Cube _moveFPrime(Cube cube){
+    int i;
+    for(i=0;i<3;i++)
+        cube = _moveF(cube);
+    return cube;
+}
+
+Cube _moveF2(Cube cube){
+    int i;
+    for(i=0;i<2;i++)
+        cube = _moveF(cube);
+    return cube;
+}
+
 STD_MOVES STDMoves(){
     STD_MOVES stdMoves;
 
@@ -209,6 +256,9 @@ STD_MOVES STDMoves(){
     stdMoves.L = _moveL;
     stdMoves.LPrime = _moveLPrime;
     stdMoves.L2 = _moveL2;
+    stdMoves.F = _moveF;
+    stdMoves.FPrime = _moveFPrime;
+    stdMoves.F2 = _moveF2;
     
     return stdMoves;
 }
