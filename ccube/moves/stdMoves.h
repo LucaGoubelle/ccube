@@ -13,9 +13,15 @@ typedef struct {
     Cube (*R)(Cube);
     Cube (*RPrime)(Cube);
     Cube (*R2)(Cube);
+    Cube (*L)(Cube);
+    Cube (*LPrime)(Cube);
+    Cube (*L2)(Cube);
+    Cube (*F)(Cube);
+    Cube (*FPrime)(Cube);
+    Cube (*F2)(Cube);
 } STD_MOVES;
 
-Cube moveU(Cube cube){
+Cube _moveU(Cube cube){
     int size = cube.size;
     cube.up = rotate(cube.up, size);
 
@@ -45,21 +51,21 @@ Cube moveU(Cube cube){
     return cube;
 }
 
-Cube moveUPrime(Cube cube){
+Cube _moveUPrime(Cube cube){
     int i;
     for(i=0;i<3;i++)
-        cube = moveU(cube);
+        cube = _moveU(cube);
     return cube;
 }
 
-Cube moveU2(Cube cube){
+Cube _moveU2(Cube cube){
     int i;
     for(i=0;i<2;i++)
-        cube = moveU(cube);
+        cube = _moveU(cube);
     return cube;
 }
 
-Cube moveD(Cube cube){
+Cube _moveD(Cube cube){
     int size = cube.size;
     cube.down = rotate(cube.down, size);
 
@@ -89,21 +95,21 @@ Cube moveD(Cube cube){
     return cube;
 }
 
-Cube moveDPrime(Cube cube){
+Cube _moveDPrime(Cube cube){
     int i;
     for(i=0;i<3;i++)
-        cube = moveD(cube);
+        cube = _moveD(cube);
     return cube;
 }
 
-Cube moveD2(Cube cube){
+Cube _moveD2(Cube cube){
     int i;
     for(i=0;i<2;i++)
-        cube = moveD(cube);
+        cube = _moveD(cube);
     return cube;
 }
 
-Cube moveR(Cube cube){
+Cube _moveR(Cube cube){
     int size = cube.size;
     cube.right = rotate(cube.right, size);
 
@@ -133,32 +139,126 @@ Cube moveR(Cube cube){
     return cube;
 }
 
-Cube moveRPrime(Cube cube){
+Cube _moveRPrime(Cube cube){
     int i;
     for(i=0;i<3;i++)
-        cube = moveR(cube);
+        cube = _moveR(cube);
     return cube;
 }
 
-Cube moveR2(Cube cube){
+Cube _moveR2(Cube cube){
     int i;
     for(i=0;i<2;i++)
-        cube = moveR(cube);
+        cube = _moveR(cube);
+    return cube;
+}
+
+Cube _moveL(Cube cube){
+    int size = cube.size;
+    cube.left = rotate(cube.left, size);
+
+    char** newUp = genEmptyFace(size);
+    char** newFront = genEmptyFace(size);
+    char** newDown = genEmptyFace(size);
+    char** newBack = genEmptyFace(size);
+
+    int i;
+    for(i=0;i<size;i++){
+        newFront[i][0] = cube.up[i][0];
+        newDown[i][0] = cube.front[i][0];
+        newBack[i][0] = cube.down[i][0];
+        newUp[i][size-1] = cube.back[i][size-1];
+    }
+
+    cube.front = transfert(cube.front, newFront, size);
+    cube.up = transfert(cube.up, rotateTwice(newUp, size), size);
+    cube.down = transfert(cube.down, newDown, size);
+    cube.back = transfert(cube.back, rotateTwice(newBack, size), size);
+
+    freeFace(newUp, size);
+    freeFace(newFront, size);
+    freeFace(newDown, size);
+    freeFace(newBack, size);
+    
+    return cube;
+}
+
+Cube _moveLPrime(Cube cube){
+    int i;
+    for(i=0;i<3;i++)
+        cube = _moveL(cube);
+    return cube;
+}
+
+Cube _moveL2(Cube cube){
+    int i;
+    for(i=0;i<2;i++)
+        cube = _moveL(cube);
+    return cube;
+}
+
+Cube _moveF(Cube cube){
+    int size = cube.size;
+    cube.front = rotate(cube.front, size);
+
+    char** newUp = genEmptyFace(size);
+    char** newLeft = genEmptyFace(size);
+    char** newRight = genEmptyFace(size);
+    char** newDown = genEmptyFace(size);
+
+    int i;
+    for(i=0;i<size;i++){
+        newUp[i][size-1] = cube.left[i][size-1];
+        newLeft[0][i] = cube.down[0][i];
+        newRight[size-1][i] = cube.up[size-1][i];
+        newDown[i][0] = cube.right[i][0];
+    }
+
+    cube.up = transfert(cube.up, rotate(newUp, size), size);
+    cube.left = transfert(cube.left, rotate(newLeft, size), size);
+    cube.right = transfert(cube.right, rotate(newRight, size), size);
+    cube.down = transfert(cube.down, rotate(newDown, size), size);
+
+    freeFace(newUp, size);
+    freeFace(newLeft, size);
+    freeFace(newRight, size);
+    freeFace(newDown, size);
+
+    return cube;
+}
+
+Cube _moveFPrime(Cube cube){
+    int i;
+    for(i=0;i<3;i++)
+        cube = _moveF(cube);
+    return cube;
+}
+
+Cube _moveF2(Cube cube){
+    int i;
+    for(i=0;i<2;i++)
+        cube = _moveF(cube);
     return cube;
 }
 
 STD_MOVES STDMoves(){
     STD_MOVES stdMoves;
 
-    stdMoves.U = moveU;
-    stdMoves.UPrime = moveUPrime;
-    stdMoves.U2 = moveU2;
-    stdMoves.D = moveD;
-    stdMoves.DPrime = moveDPrime;
-    stdMoves.D2 = moveD2;
-    stdMoves.R = moveR;
-    stdMoves.RPrime = moveRPrime;
-    stdMoves.R2 = moveR2;
+    stdMoves.U = _moveU;
+    stdMoves.UPrime = _moveUPrime;
+    stdMoves.U2 = _moveU2;
+    stdMoves.D = _moveD;
+    stdMoves.DPrime = _moveDPrime;
+    stdMoves.D2 = _moveD2;
+    stdMoves.R = _moveR;
+    stdMoves.RPrime = _moveRPrime;
+    stdMoves.R2 = _moveR2;
+    stdMoves.L = _moveL;
+    stdMoves.LPrime = _moveLPrime;
+    stdMoves.L2 = _moveL2;
+    stdMoves.F = _moveF;
+    stdMoves.FPrime = _moveFPrime;
+    stdMoves.F2 = _moveF2;
     
     return stdMoves;
 }

@@ -7,6 +7,7 @@ int main(int argc, char** argv){
     int size = 3;
     Cube cube = getCube(size);
     MOVER mover = Mover();
+    CUBE_PRINTER printer = CubePrinter();
 
     printCube(cube);
     printf("\n\n");
