@@ -1,6 +1,6 @@
+//@author: LucaGoubelle 🦊
 #pragma once
 #include "cube.h"
-#include <stdbool.h>
 
 typedef struct {
     Cube (*load3x3)(char*);
