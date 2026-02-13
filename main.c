@@ -7,8 +7,10 @@ int main(int argc, char** argv){
     int size = 3;
     CUBE_PRINTER printer = CubePrinter();
     SCRAMBLER scrambler = Scrambler();
+    SAVE_HANDLER sh = SaveHandler();
 
-    Cube cube = getCube(size);
+    // Cube cube = getCube(size);
+    Cube cube = sh.load3x3("res/cube3x3.dsv", size);
     printer.print(cube);
 
     destroyCube(cube);

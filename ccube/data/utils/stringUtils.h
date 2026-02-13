@@ -8,7 +8,6 @@ typedef struct {
     char** (*split)(const char*,const char*,int*);
     void (*freeSplit)(char**,int);
     char* (*concat)(char*,char*);
-    void (*freeConcat)(char*);
 } STRING_UTILS;
 
 char** _split(const char* str, const char* delim, int* count){
@@ -40,14 +39,12 @@ void _freeSplitted(char** tokens, int count){
 }
 
 char* _concat(char* str1, char* str2){
-    char* result = (char*)malloc(strlen(str1)+strlen(str2)+1);
-    strcpy(result, str1);
-    strcat(result, str2);
+    size_t len1 = strlen(str1);
+    size_t len2 = strlen(str2);
+    char* result = (char*)malloc(len1+len2+1);
+    memcpy(result, str1, len1);
+    memcpy(result + len1, str2, len2 + 1);
     return result;
-}
-
-void _freeConcat(char* concat){
-    free(concat);
 }
 
 STRING_UTILS StringUtils(){
@@ -55,6 +52,5 @@ STRING_UTILS StringUtils(){
     su.split = _split;
     su.freeSplit = _freeSplitted;
     su.concat = _concat;
-    su.freeConcat = _freeConcat;
     return su;
 }
