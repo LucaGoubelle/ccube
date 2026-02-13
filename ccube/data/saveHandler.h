@@ -42,8 +42,14 @@ Cube _load3x3(char* filepath, int size){
 }
 
 char* _dump3x3(char* filepath, Cube cube){
+    int size = cube.size;
+    FILE_HANDLER fh = FileHandler();
+    STRING_UTILS su = StringUtils();
+    char* content;
     //todo: implement this
-    return "???";
+    char* result = fh.write(filepath, content);
+    free(content);
+    return result;
 }
 
 SAVE_HANDLER SaveHandler(){
