@@ -1,5 +1,6 @@
 #pragma once
 #include "cube.h"
+#include <stdbool.h>
 
 typedef struct {
     Cube (*load3x3)(char*);
@@ -7,11 +8,22 @@ typedef struct {
 } SAVE_HANDLER;
 
 int nbLines = 6;
-int nbCol3x3 = 11;
+int nbCol3x3 = 12;
 
 Cube _load3x3(char* filepath){
-    //todo: implement this
-    return getCube(3);
+    Cube cube = getEmptyCube(3);
+    FILE* f = fopen(filepath, "r");
+    
+    char ligne[nbCol3x3];
+    int i = 1;
+    while(fgets(ligne, sizeof(ligne), f) != NULL){
+        printf(ligne);
+        //todo: find a solution to prevent incrementing twice
+        printf("%d", i);
+        i++;
+    }
+    fclose(f);
+    return cube;
 }
 
 char* _dump3x3(char* filepath, Cube cube){

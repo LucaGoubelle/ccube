@@ -24,6 +24,18 @@ Cube getCube(int size){
     return cube;
 }
 
+Cube getEmptyCube(int size){
+    Cube cube;
+    cube.size = size;
+    cube.back = genEmptyFace(size);
+    cube.up = genEmptyFace(size);
+    cube.front = genEmptyFace(size);
+    cube.left = genEmptyFace(size);
+    cube.right = genEmptyFace(size);
+    cube.down = genEmptyFace(size);
+    return cube;
+}
+
 void destroyCube(Cube cube){
     freeFace(cube.back, cube.size);
     freeFace(cube.up, cube.size);
