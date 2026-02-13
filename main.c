@@ -6,18 +6,14 @@ int main(int argc, char** argv){
 
     int size = 3;
     Cube cube = getCube(size);
-    MOVER mover = Mover();
     CUBE_PRINTER printer = CubePrinter();
+    SCRAMBLER scrambler = Scrambler();
 
-    printCube(cube);
+    printer.print(cube);
     printf("\n\n");
 
-    SCRAMBLER scrambler = Scrambler();
     cube = scrambler.scrambling(cube);
-    // char* moves[] = {"R'","y",NULL};
-    // cube = mover.moveMany(cube, moves);
-
-    printCube(cube);
+    printer.print(cube);
 
     destroyCube(cube);
 
