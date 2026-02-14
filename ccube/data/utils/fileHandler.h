@@ -6,6 +6,7 @@
 typedef struct {
     char* (*read)(const char*);
     char* (*write)(const char*, char*);
+    char* (*append)(const char*, char*);
 } FILE_HANDLER;
 
 char* _read(const char* filepath){
@@ -25,7 +26,14 @@ char* _read(const char* filepath){
 
 char* _write(const char* filepath, char* buffer){
     FILE* f = fopen(filepath, "w");
-    fprintf(f, buffer);
+    fprintf(f, "%s", buffer);
+    fclose(f);
+    return "success !";
+}
+
+char* _append(const char* filepath, char* buffer){
+    FILE* f = fopen(filepath, "a");
+    fprintf(f, "%s", buffer);
     fclose(f);
     return "success !";
 }
@@ -34,5 +42,6 @@ FILE_HANDLER FileHandler(){
     FILE_HANDLER fh;
     fh.read = _read;
     fh.write = _write;
+    fh.append = _append;
     return fh;
 }

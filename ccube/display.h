@@ -35,20 +35,20 @@ void _printRowUpDown(char* row, int size){
     for(i=0;i<size;i++)
         printf(" ");
     for(j=0;j<size;j++)
-        printf(_getColorString(row[j]));
+        printf("%s", _getColorString(row[j]));
     printf("\n");
 }
 
 void _printRowLFRB(int size, char* rowL, char* rowF, char* rowR, char* rowB){
     int i, j, k, l;
     for(i=0;i<size;i++)
-        printf(_getColorString(rowL[i]));
+        printf("%s", _getColorString(rowL[i]));
     for(j=0;j<size;j++)
-        printf(_getColorString(rowF[j]));
+        printf("%s", _getColorString(rowF[j]));
     for(k=0;k<size;k++)
-        printf(_getColorString(rowR[k]));
+        printf("%s", _getColorString(rowR[k]));
     for(l=0;l<size;l++)
-        printf(_getColorString(rowB[l]));
+        printf("%s", _getColorString(rowB[l]));
     printf("\n");
 }
 

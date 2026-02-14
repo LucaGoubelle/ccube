@@ -5,8 +5,8 @@
 #include "utils/stringUtils.h"
 
 typedef struct {
-    Cube (*load3x3)(char*, int);
-    char* (*dump3x3)(char*,Cube);
+    Cube (*load)(const char*, int);
+    char* (*dump3x3)(const char*,Cube);
 } SAVE_HANDLER;
 
 char** _setFace(char** face, char* line, int size){
@@ -21,7 +21,7 @@ char** _setFace(char** face, char* line, int size){
     return face;
 }
 
-Cube _load3x3(char* filepath, int size){
+Cube _load(const char* filepath, int size){
     Cube cube = getEmptyCube(size);
     FILE_HANDLER fh = FileHandler();
     STRING_UTILS su = StringUtils();
@@ -41,20 +41,28 @@ Cube _load3x3(char* filepath, int size){
     return cube;
 }
 
-char* _dump3x3(char* filepath, Cube cube){
+char* _rowToString(char* row, int size){
+    //todo: implement this
+    return "???";
+}
+
+char* _faceToString(char** face, int size){
+    //todo: implement this
+    return "???";
+}
+
+char* _dump3x3(const char* filepath, Cube cube){
     int size = cube.size;
     FILE_HANDLER fh = FileHandler();
     STRING_UTILS su = StringUtils();
-    char* content;
     //todo: implement this
-    char* result = fh.write(filepath, content);
-    free(content);
+    char* result = fh.write(filepath, "content");
     return result;
 }
 
 SAVE_HANDLER SaveHandler(){
     SAVE_HANDLER sh;
-    sh.load3x3 = _load3x3;
+    sh.load = _load;
     sh.dump3x3 = _dump3x3;
     return sh;
 }
