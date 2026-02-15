@@ -14,7 +14,7 @@ int main(int argc, char** argv){
     printer.print(cube);
     printf("\n\n");
 
-    cube = mover.moveOne(cube, "Uw2");
+    cube = mover.moveOne(cube, "Dw");
     printer.print(cube);
 
     destroyCube(cube);

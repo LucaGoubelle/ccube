@@ -75,6 +75,12 @@ Cube _handleWMoves(Cube cube, char* mv){
         return wm.UwPrime(cube, 2);
     else if(mv=="Uw2")
         return wm.Uw2(cube, 2);
+    else if(mv=="Dw")
+        return wm.Dw(cube, 2);
+    else if(mv=="Dw'")
+        return wm.DwPrime(cube, 2);
+    else if(mv=="Dw2")
+        return wm.Dw2(cube, 2);
     return cube;
 }
 
