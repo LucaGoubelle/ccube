@@ -41,22 +41,52 @@ Cube _load(const char* filepath, int size){
     return cube;
 }
 
-char* _rowToString(char* row, int size){
-    //todo: implement this
-    return "???";
-}
-
-char* _faceToString(char** face, int size){
-    //todo: implement this
-    return "???";
+char* _face3x3ToString(char** face){
+    int size = 3;
+    int nbStickers = size * size;
+    int nbDelim = size-1;
+    int jump = 1;
+    int totalSize = nbStickers + nbDelim + jump;
+    char* result = (char*)malloc(sizeof(char)*totalSize + 1);
+    result[0] = face[0][0];
+    result[1] = face[0][1];
+    result[2] = face[0][2];
+    result[3] = ';';
+    result[4] = face[1][0];
+    result[5] = face[1][1];
+    result[6] = face[1][2];
+    result[7] = ';';
+    result[8] = face[2][0];
+    result[9] = face[2][1];
+    result[10] = face[2][2];
+    result[11] = '\n';
+    result[12] = '\0';
+    return result;
 }
 
 char* _dump3x3(const char* filepath, Cube cube){
     int size = cube.size;
     FILE_HANDLER fh = FileHandler();
     STRING_UTILS su = StringUtils();
-    //todo: implement this
-    char* result = fh.write(filepath, "content");
+    char* result = fh.write(filepath, "");
+    char* faceBack = _face3x3ToString(cube.back);
+    char* faceUp = _face3x3ToString(cube.up);
+    char* faceFront = _face3x3ToString(cube.front);
+    char* faceLeft = _face3x3ToString(cube.left);
+    char* faceRight = _face3x3ToString(cube.right);
+    char* faceDown = _face3x3ToString(cube.down);
+    result = fh.append(filepath, faceBack);
+    result = fh.append(filepath, faceUp);
+    result = fh.append(filepath, faceFront);
+    result = fh.append(filepath, faceLeft);
+    result = fh.append(filepath, faceRight);
+    result = fh.append(filepath, faceDown);
+    free(faceBack);
+    free(faceUp);
+    free(faceFront);
+    free(faceLeft);
+    free(faceRight);
+    free(faceDown);
     return result;
 }
 

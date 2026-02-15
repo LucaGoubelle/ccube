@@ -13,7 +13,7 @@ int main(int argc, char** argv){
     Cube cube = sh.load("res/saves/cube3x3.dsv", size);
     printer.print(cube);
 
-    char* result = sh.dump3x3("res/test.dsv",cube);
+    char* result = sh.dump3x3("res/test.dsv", cube);
     printf("%s\n", result);
 
     destroyCube(cube);
