@@ -2,6 +2,7 @@
 #pragma once
 #include "stdMoves.h"
 #include "axisMoves.h"
+#include "wMoves.h"
 
 typedef struct {
     Cube (*moveOne)(Cube, char*);
@@ -40,8 +41,7 @@ Cube _handleSTDMoves(Cube cube, char* mv){
         return stdm.FPrime(cube);
     else if(mv=="F2")
         return stdm.F2(cube);
-    else
-        return cube;
+    return cube;
 }
 
 Cube _handleAxisMoves(Cube cube, char* mv){
@@ -64,13 +64,24 @@ Cube _handleAxisMoves(Cube cube, char* mv){
         return axm.ZPrime(cube);
     else if(mv=="z2")
         return axm.Z2(cube);
-    else
-        return cube;
+    return cube;
+}
+
+Cube _handleWMoves(Cube cube, char* mv){
+    WMOVES wm = WMoves();
+    if(mv=="Uw")
+        return wm.Uw(cube, 2);
+    else if(mv=="Uw'")
+        return wm.UwPrime(cube, 2);
+    else if(mv=="Uw2")
+        return wm.Uw2(cube, 2);
+    return cube;
 }
 
 Cube _simpleMove(Cube cube, char* mv){
     cube = _handleSTDMoves(cube, mv);
     cube = _handleAxisMoves(cube, mv);
+    cube = _handleWMoves(cube, mv);
     return cube;
 }
 

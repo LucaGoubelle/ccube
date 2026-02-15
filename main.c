@@ -6,15 +6,16 @@ int main(int argc, char** argv){
 
     int size = 3;
     CUBE_PRINTER printer = CubePrinter();
-    SCRAMBLER scrambler = Scrambler();
+    MOVER mover = Mover();
     SAVE_HANDLER sh = SaveHandler();
 
     // Cube cube = getCube(size);
     Cube cube = sh.load("res/saves/cube3x3.dsv", size);
     printer.print(cube);
+    printf("\n\n");
 
-    char* result = sh.dump3x3("res/test.dsv", cube);
-    printf("%s\n", result);
+    cube = mover.moveOne(cube, "Uw2");
+    printer.print(cube);
 
     destroyCube(cube);
     printf("End prog...\n");
